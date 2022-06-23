@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2022/06/23 06:49:45 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/06/23 07:15:34 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ NAME				=	gg
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 $(NAME): $(OBJ)
+	$(MAKE) all -C mlx_linux
 	$(CC) $(OBJ) -L mlx_linux -lmlx_Linux -lXext -lX11 -lm -o $(NAME)
 
 all:	$(NAME)

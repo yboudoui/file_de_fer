@@ -6,27 +6,20 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 18:26:16 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/06/21 19:59:44 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/06/23 07:37:44 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_wrapper.h"
 
-void	ft_put_pixel(t_mlx *mlx, void *handler)
+void	FT_pixel(void *data, t_pixel *pix)
 {
-	t_handler	*h;
+	t_mlx	*mlx;
 
-	h = handler;
-	void	func(void *pixel)
-	{
-		t_pixel	*pix;
-
-		pix = pixel;
-		mlx_pixel_put(mlx->mlx, mlx->win,
-				pix->position.x, pix->position.y,
-				pix->color);
-	}
-	h->draw(h, func);
+	mlx = data;
+	mlx_pixel_put(mlx->mlx, mlx->win,
+			pix->position.x, pix->position.y,
+			pix->color);
 }
 
 t_mlx	init(char *title, int width, int height)
@@ -39,5 +32,6 @@ t_mlx	init(char *title, int width, int height)
 	out.mlx = mlx_init();
 	out.win = mlx_new_window(out.mlx, width, height, title);
 	out.win_size = (t_vec2){width, height};
+	out.draw.put_pixel = &FT_pixel;
 	return (out);
 }

@@ -6,21 +6,19 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:26:50 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/06/21 20:19:28 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/06/23 07:34:57 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line.h"
 
-static void	ft_draw(void *data, t_func func)
+void	ft_draw(t_line *line, void *handler)
 {
-	t_line	*line;
 	t_pixel	pixel;
 	t_vec2	d, s;
 	int	error;
 	int	e2;
 
-	line = data;
 	pixel.color = 0x00FF0000;
 	d.x = abs(line->end.x - line->start.x);
 	d.y = -abs(line->end.y - line->start.y);
@@ -29,7 +27,7 @@ static void	ft_draw(void *data, t_func func)
 	pixel.position = line->start;
 	while(pixel.position.x - line->end.x - pixel.position.y - line->end.y)
 	{
-		func(&pixel);
+		((t_draw *)handler)->put_pixel(handler, &pixel);
 		e2 = 2 * error;
 		error += (d.y * (e2 > d.y));
 		error += (d.x * (e2 < d.x));
