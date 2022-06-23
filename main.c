@@ -6,10 +6,11 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:51:33 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/06/21 20:22:40 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/06/23 07:37:55 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//http://www.cs.yale.edu/homes/aspnes/classes/223/notes.html
 #include "fdf.h"
 
 int	main(void)
@@ -23,8 +24,7 @@ int	main(void)
 	line = new_line(1920/2, 100, 1920/2, -980);
 	b = new_line(200, 1080/2, 1720, 1080 / 2);
 
-	ft_put_pixel(&mlx, &line);
-	ft_put_pixel(&mlx, &b);
+	line.draw(&line, &mlx);
 
 	mlx_loop(mlx.mlx);
 }
