@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec2.h                                             :+:      :+:    :+:   */
+/*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 17:22:41 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/10/02 09:03:29 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/11/05 14:52:34 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/11/07 18:53:16 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VEC2_H
-# define VEC2_H
+#include "file.h"
 
-typedef struct s_vec2 {
-	int	x;
-	int	y;
-}	t_vec2;
+t_list	*read_file(char *path, int oflag)
+{
+	int		fd;
+	char	*line;
+	t_list	*out;
 
-t_vec2	vec2(int x, int y);
-int		abs(int nb);
-int		is_equal(t_vec2 a, t_vec2 b);
-t_vec2	cmp_vec2(t_vec2 a, t_vec2 b);
-t_vec2	substract_vec2(t_vec2 a, t_vec2 b);
-t_vec2	add_vec2(t_vec2 a, t_vec2 b);
-//t_vec2	generique(t_vec2 (*ft)(t_vec2, t_vec2), t_vec2 a, t_vec2 b);
-#endif
+	fd = open(path, oflag);
+	if (fd < 0)
+		return (NULL);
+	out = NULL;
+	while (true)
+	{
+		line = get_next_line(fd);
+		if (NULL == line)
+			break ;
+		if (false == lst_create_back(&out, line))
+		{
+			close(fd);
+			return (lst_clear(&out, free), NULL);
+		}
+	}
+	close(fd);
+	return (out);
+}
