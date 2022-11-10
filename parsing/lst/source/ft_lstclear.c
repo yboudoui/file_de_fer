@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec2.h                                             :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 17:22:41 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/10/02 09:03:29 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/05/03 14:42:36 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/11/07 21:09:02 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VEC2_H
-# define VEC2_H
+#include "lst.h"
 
-typedef struct s_vec2 {
-	int	x;
-	int	y;
-}	t_vec2;
+void	lst_delone(t_list *lst, void (*del)(void*))
+{
+	if (!lst)
+		return ;
+	if (del)
+		del(lst->content);
+	free(lst);
+}
 
-t_vec2	vec2(int x, int y);
-int		abs(int nb);
-int		is_equal(t_vec2 a, t_vec2 b);
-t_vec2	cmp_vec2(t_vec2 a, t_vec2 b);
-t_vec2	substract_vec2(t_vec2 a, t_vec2 b);
-t_vec2	add_vec2(t_vec2 a, t_vec2 b);
-//t_vec2	generique(t_vec2 (*ft)(t_vec2, t_vec2), t_vec2 a, t_vec2 b);
-#endif
+void	lst_clear(t_list **lst, void (*del)(void*))
+{
+	t_list	*tmp;
+
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		lst_delone(*lst, del);
+		(*lst) = tmp;
+	}
+}

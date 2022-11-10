@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec2.h                                             :+:      :+:    :+:   */
+/*   str.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 17:22:41 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/10/02 09:03:29 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/11/06 16:18:51 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/11/06 16:23:21 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VEC2_H
-# define VEC2_H
+#ifndef STR_H
+# define STR_H
 
-typedef struct s_vec2 {
-	int	x;
-	int	y;
-}	t_vec2;
+# include "memory.h"
 
-t_vec2	vec2(int x, int y);
-int		abs(int nb);
-int		is_equal(t_vec2 a, t_vec2 b);
-t_vec2	cmp_vec2(t_vec2 a, t_vec2 b);
-t_vec2	substract_vec2(t_vec2 a, t_vec2 b);
-t_vec2	add_vec2(t_vec2 a, t_vec2 b);
-//t_vec2	generique(t_vec2 (*ft)(t_vec2, t_vec2), t_vec2 a, t_vec2 b);
+size_t	ft_strlen(const char *s);
+char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	**ft_split(char	const *str, char c);
 #endif

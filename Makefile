@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2022/10/02 11:59:27 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/11/07 20:57:36 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,90 +19,72 @@ CFLAGS				=	-Wall -Wextra -Werror -g3
 RM					=	rm -f
 
 # **************************************************************************** #
+SRCS	=\
+./mlx/data.c\
+./mlx/my_mlx.c\
+./mlx/image.c\
+./mlx/line.c\
+./main.c\
+./vec2/vec2.c\
+./parsing/utils/is_charset/is_charset.c\
+./parsing/utils/atoi_to.c\
+./parsing/utils/int_array/int_array.c\
+./parsing/utils/get_next_line/get_next_line_utils.c\
+./parsing/utils/get_next_line/get_next_line.c\
+./parsing/str/ft_strtrim.c\
+./parsing/str/ft_strlen.c\
+./parsing/str/ft_substr.c\
+./parsing/str/ft_split.c\
+./parsing/lst/source/ft_lst_remove_one.c\
+./parsing/lst/source/ft_lstclear.c\
+./parsing/lst/source/transform.c\
+./parsing/lst/source/ft_lstmap.c\
+./parsing/lst/source/add.c\
+./parsing/lst/source/ft_lstlast.c\
+./parsing/file/file.c\
+./parsing/memory/ft_memcpy.c\
+./parsing/memory/ft_calloc.c\
+./parsing/atoi_words.c\
+./parsing/parsing.c\
 
-VEC2_DIR			=	vec2/
-
-VEC2_SRC			=	$(addprefix $(VEC2_DIR),			\
-						vec2.c								\
-						)
-
-VEC2_INC			=	$(addprefix $(VEC2_DIR),			\
-						.									\
-						)
-
-# **************************************************************************** #
-
-LINE_DIR			=	line/
-
-LINE_SRC			=	$(addprefix $(LINE_DIR),			\
-						line.c								\
-						)
-
-LINE_INC			=	$(addprefix $(LINE_DIR),			\
-						.									\
-						)
-
-# **************************************************************************** #
-
-WINDOW_DIR			=	window/
-
-WINDOW_SRC			=	$(addprefix $(WINDOW_DIR),			\
-						window.c							\
-						)
-
-WINDOW_INC			=	$(addprefix $(WINDOW_DIR),			\
-						.									\
-						)
-
-# **************************************************************************** #
-
-MLX_WRAPPER_DIR		=	mlx_wrapper/
-
-MLX_WRAPPER_SRC		=	$(addprefix $(MLX_WRAPPER_DIR),		\
-						$(VEC2_SRC)							\
-						$(LINE_SRC)							\
-						$(WINDOW_SRC)						\
-						mlx_wrapper.c						\
-						mlx_obj.c							\
-						)
-
-MLX_WRAPPER_INC		=	$(addprefix $(MLX_WRAPPER_DIR),		\
-						$(VEC2_INC)							\
-						$(LINE_INC)							\
-						$(WINDOW_INC)						\
-						.									\
-						)
+INCS	=\
+./mlx\
+./mlx/mlx_linux\
+./vec2\
+./parsing/utils/is_charset\
+./parsing/utils\
+./parsing/utils/int_array\
+./parsing/utils/get_next_line\
+./parsing/str\
+./parsing/lst/include\
+./parsing\
+./parsing/file\
+./parsing/memory\
 
 # **************************************************************************** #
-
-SRCS				=	$(MLX_WRAPPER_SRC)			\
-						main.c						\
-
-INCS				=	$(MLX_WRAPPER_INC)			\
-						.							\
 
 OBJS				=	$(SRCS:.c=.o)
 
 .c.o:
-	@$(CC) $(CFLAGS)	\
+	$(CC) $(CFLAGS)	\
 		$(addprefix -I , $(INCS))	\
 		-c $<	\
 		-o $(<:.c=.o)	
 	@echo $<
 
 $(NAME):	$(OBJS)
-			$(MAKE) all -C mlx_wrapper/mlx_linux
-			$(CC) $(OBJS) -L mlx_wrapper/mlx_linux -lmlx_Linux -lXext -lX11 -lm -o $(NAME)
+			$(MAKE) all -C mlx/mlx_linux
+			$(CC) $(OBJS) -L mlx/mlx_linux -lmlx_Linux -lmlx -lXext -lX11 -lm -o $(NAME)
 
 all:		$(NAME)
 
 clean:
-			$(MAKE) clean -C mlx_wrapper/mlx_linux
+			$(MAKE) clean -C mlx/mlx_linux
 			$(RM) $(OBJS)
 
 re:			fclean all
 
 valgrind:	all
-			valgrind --leak-check=full --show-leak-kinds=all -s ./$(NAME)
+			valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) ./asset/42.fdf
 
 .PHONY:		all clean fclean re

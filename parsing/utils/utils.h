@@ -1,28 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec2.h                                             :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 17:22:41 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/10/02 09:03:29 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/11/06 16:30:06 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/11/06 16:30:39 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VEC2_H
-# define VEC2_H
+#ifndef UTILS_H
+# define UTILS_H
 
-typedef struct s_vec2 {
-	int	x;
-	int	y;
-}	t_vec2;
-
-t_vec2	vec2(int x, int y);
-int		abs(int nb);
-int		is_equal(t_vec2 a, t_vec2 b);
-t_vec2	cmp_vec2(t_vec2 a, t_vec2 b);
-t_vec2	substract_vec2(t_vec2 a, t_vec2 b);
-t_vec2	add_vec2(t_vec2 a, t_vec2 b);
-//t_vec2	generique(t_vec2 (*ft)(t_vec2, t_vec2), t_vec2 a, t_vec2 b);
+bool	ft_atoi_to(char **str, int *result);
 #endif

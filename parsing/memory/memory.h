@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec2.h                                             :+:      :+:    :+:   */
+/*   memory.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 17:22:41 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/10/02 09:03:29 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/11/06 16:18:51 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/11/06 16:24:22 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VEC2_H
-# define VEC2_H
+#ifndef MEMORY_H
+# define MEMORY_H
 
-typedef struct s_vec2 {
-	int	x;
-	int	y;
-}	t_vec2;
+# include <stdlib.h>
+# include <stddef.h>
 
-t_vec2	vec2(int x, int y);
-int		abs(int nb);
-int		is_equal(t_vec2 a, t_vec2 b);
-t_vec2	cmp_vec2(t_vec2 a, t_vec2 b);
-t_vec2	substract_vec2(t_vec2 a, t_vec2 b);
-t_vec2	add_vec2(t_vec2 a, t_vec2 b);
-//t_vec2	generique(t_vec2 (*ft)(t_vec2, t_vec2), t_vec2 a, t_vec2 b);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+void	*ft_calloc(size_t nmemb, size_t size);
 #endif
