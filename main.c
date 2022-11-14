@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:51:33 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/10 17:02:16 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/14 11:28:40 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,13 @@ t_vec2	vec2_add(t_vec2 a, t_vec2 b)
 t_vec2	transforme_vec2(t_vec2 in)
 {
 	t_vec2			out;
-//	const t_vec2	x = {2, 1};
-//	const t_vec2	y = {-2, 1};
-
 
 	out = (t_vec2){
 		.x = (in.x - in.y),
 		.y = ((in.x / 2) + (in.y / 2)),
 	};
-/*
-	out = vec2_add(
-					vec2_mul(x ,vec2_int(in.x)),
-					vec2_mul(y, vec2_int(in.y))
-					);
-*/
-//	return (vec2_add(out, vec2_int(300)));
 	out.x += 600;
+	out.y += 200;
 	return (out);
 }
 
@@ -78,131 +69,60 @@ void	print_line(t_line in)
 {
 	printf("start\t%d %d\nend\t%d %d\n", in.start.x, in.start.y, in.end.x, in.end.y);
 }
-/*
-void	draw_col(int pad, t_map *map, t_image *img)
-{
-	static t_line	line_col = {0};
-	size_t			x_idx;
-	size_t			y_idx;
-
-	y_idx = 0;
-	while (y_idx < map->max_row - 1)
-	{
-		line_col.start.y += pad;
-		line_col.end.y = line_col.start.y + pad;
-		x_idx = 0;
-		printf("hey\n");
-		while (x_idx < map->map[y_idx]->len)
-		{
-			line_col.start.x += pad;
-			line_col.end.x += pad;
-			t_line	tmp = transforme(line_col);
-			print_line(tmp);
-			tmp.start.y -= (map->map[y_idx]->array[x_idx] * 7);
-			tmp.end.y -= (map->map[y_idx]->array[x_idx] * 7);
-			draw_line(tmp, img);
-//			draw_line(line_col, img);
-			x_idx += 1;
-		}
-		line_col.start.x = 0;
-		line_col.end.x = 0;
-		y_idx += 1;
-	}
-	line_col = (t_line){0};
-}
 
 void	draw_row(int pad, t_map *map, t_image *img)
 {
-	static t_line	line_row = {0};
-	size_t			x_idx;
-	size_t			y_idx;
-
-	y_idx = 0;
-	while (y_idx < map->max_row)
-	{
-		line_row.start.y += pad;
-		line_row.end.y += pad;
-		x_idx = 0;
-		while (x_idx < map->map[y_idx]->len - 1)
-		{
-			line_row.start.x += pad;
-			line_row.end.x = line_row.start.x + pad;
-			t_line	tmp = transforme(line_row);
-			print_line(tmp);
-			tmp.start.y -= (map->map[y_idx]->array[x_idx] * 7);
-			tmp.end.y -= (map->map[y_idx]->array[x_idx] * 7);
-
-			draw_line(tmp, img);
-
-//			draw_line(line_row, img);
-			x_idx += 1;
-		}
-		line_row.start.x = 0;
-		line_row.end.x = 0;
-		y_idx += 1;
-	}
-	line_row = (t_line){0};
-}
-*/
-
-void	draw_col(int pad, t_map *map, t_image *img)
-{
-	static t_line	line_col = {0};
+	t_vec2			start;
+	t_vec2			end;
 	t_line			tmp;
 	size_t			x_idx;
 	size_t			y_idx;
 
+	end = transforme_vec2((t_vec2){0});
 	y_idx = 0;
 	while (y_idx < map->max_row)
 	{
 		x_idx = 0;
-		line_col.end.y += pad;
-		while (x_idx < map->map[y_idx]->len)
+		end = transforme_vec2((t_vec2){0, y_idx * pad});
+		while (x_idx < map->max_col)
 		{
-//			line_col.start.x = line_col.end.x;
+			start = end;
+			end = transforme_vec2((t_vec2){x_idx * pad, y_idx * pad});
+			end.y -= (map->map[y_idx]->array[x_idx] * 3);
+			tmp = (t_line){.start = start, .end = end};
 
-			tmp = transforme(line_col);
-			tmp.start.y -= (map->map[y_idx]->array[x_idx] * 7);
-			tmp.end.y -= (map->map[y_idx]->array[x_idx] * 7);
 			draw_line(tmp, img);
-
 			x_idx += 1;
-			line_col.end.x += pad;
-			line_col.start.x += pad;
 		}
-		line_col.start.y = line_col.end.y;
-		line_col.start.x = 0;
-		line_col.end.x = 0;
 		y_idx += 1;
 	}
 }
 
-void	draw_row(int pad, t_map *map, t_image *img)
+void	draw_col(int pad, t_map *map, t_image *img)
 {
-	static t_line	line_row = {0};
+	t_vec2			start;
+	t_vec2			end;
 	t_line			tmp;
 	size_t			x_idx;
 	size_t			y_idx;
 
-	y_idx = 0;
-	while (y_idx < map->max_row)
+	end = transforme_vec2((t_vec2){0});
+	x_idx = 0;
+	while (x_idx < map->max_col)
 	{
-		x_idx = 0;
-		line_row.start.y += pad;
-		line_row.end.y += pad;
-		while (x_idx < map->map[y_idx]->len - 1)
+		y_idx = 0;
+		end = transforme_vec2((t_vec2){x_idx * pad, y_idx * pad});
+		while (y_idx < map->max_row)
 		{
-			line_row.end.x += pad;
-			tmp = transforme(line_row);
-			tmp.start.y -= (map->map[y_idx]->array[x_idx] * 7);
-			tmp.end.y -= (map->map[y_idx]->array[x_idx] * 7);
+			start = end;
+			end = transforme_vec2((t_vec2){x_idx * pad, y_idx * pad});
+			end.y -= (map->map[y_idx]->array[x_idx] * 3);
+			tmp = (t_line){.start = start, .end = end};
+
 			draw_line(tmp, img);
-			line_row.start.x = line_row.end.x;
-			x_idx += 1;
+			y_idx += 1;
 		}
-		line_row.start.x = 0;
-		line_row.end.x = 0;
-		y_idx += 1;
+		x_idx += 1;
 	}
 }
 
@@ -221,14 +141,8 @@ int	get_pad(t_map *map)
 int	draw(void *input)
 {
 	t_data	*data;
-//	int		pad;
 
 	data = input;
-/*
-	pad = get_pad(data->map);
-	draw_row(pad, data->map, data->mlx->img);
-	draw_col(pad, data->map, data->mlx->img);
-*/
 	mlx_put_image_to_window(data->mlx->mlx, data->mlx->win,
 							data->mlx->img->data, 0, 0);
 	return (0);
@@ -243,7 +157,7 @@ void	mlx_run(char *path, int width, int height, int	(*draw)(void*))
 		return ;
 
 //	int pad = get_pad(out->map);
-	int pad = 50;
+	int pad = 5;
 	draw_row(pad, out->map, out->mlx->img);
 	draw_col(pad, out->map, out->mlx->img);
 

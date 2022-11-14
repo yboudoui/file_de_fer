@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2022/11/07 20:57:36 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/11/14 09:56:59 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,6 +81,9 @@ all:		$(NAME)
 clean:
 			$(MAKE) clean -C mlx/mlx_linux
 			$(RM) $(OBJS)
+
+fclean:		clean
+			$(RM) $(NAME)
 
 re:			fclean all
 
