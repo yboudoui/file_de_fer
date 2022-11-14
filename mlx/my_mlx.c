@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:45:53 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/07 19:15:01 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/14 18:42:02 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ t_mlx	*create_mlx(char *title, int width, int height)
 			return (free(out), NULL);
 		out->win = mlx_new_window(out->mlx, width, height, title);
 		if (NULL == out->win)
-			return(delete_mlx(out), NULL);
+			return (delete_mlx(out), NULL);
 		out->img = image_new(out, width, height);
 		if (NULL == out->img)
-			return(delete_mlx(out), NULL);
-		mlx_hook(out->win, 2, 1L<<0, close_callback, out);
+			return (delete_mlx(out), NULL);
+		mlx_hook(out->win, 2, 1L << 0, close_callback, out);
 	}
 	return (out);
 }

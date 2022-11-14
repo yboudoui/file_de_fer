@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:00:50 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/07 18:49:32 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/14 18:43:05 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ struct s_mlx {
 
 struct s_image {
 	void	*mlx;
+	int		width;
+	int		height;
 	void	*data;
 	char	*addr;
 	int		bits_per_pixel;
@@ -45,7 +47,6 @@ void	delete_mlx(void *data);
 void	delete_image(t_image *img);
 t_image	*image_new(t_mlx *data, int width, int height);
 void	image_put_pixel(t_image *data, int x, int y, int color);
-
 
 struct	s_data {
 	t_mlx	*mlx;

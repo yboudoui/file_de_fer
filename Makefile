@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2022/11/14 09:56:59 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/11/14 18:37:22 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ CFLAGS				=	-Wall -Wextra -Werror -g3
 RM					=	rm -f
 
 # **************************************************************************** #
+
 SRCS	=\
 ./mlx/data.c\
 ./mlx/my_mlx.c\
@@ -41,13 +42,16 @@ SRCS	=\
 ./parsing/lst/source/ft_lstmap.c\
 ./parsing/lst/source/add.c\
 ./parsing/lst/source/ft_lstlast.c\
+./parsing/atoi_words.c\
 ./parsing/file/file.c\
 ./parsing/memory/ft_memcpy.c\
 ./parsing/memory/ft_calloc.c\
-./parsing/atoi_words.c\
 ./parsing/parsing.c\
+./draw.c\
+./transform.c\
 
 INCS	=\
+./\
 ./mlx\
 ./mlx/mlx_linux\
 ./vec2\

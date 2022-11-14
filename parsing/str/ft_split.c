@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 08:46:09 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/06 18:33:02 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/14 17:40:24 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,21 @@ char	**ft_split(char	const *str, char c)
 		}
 	}
 	return (out);
+}
+
+void	free_split(void *data)
+{
+	char	**input;
+	size_t	index;
+
+	if (NULL == data)
+		return ;
+	input = data;
+	index = 0;
+	while (input[index])
+	{
+		free(input[index]);
+		index++;
+	}
+	free(input);
 }

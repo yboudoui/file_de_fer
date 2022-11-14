@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:25:11 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/10/02 08:59:43 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/14 18:44:20 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,7 @@ int abs(int nb)
 {
 	return (nb * ((nb > 0) - (nb < 0)));
 }
-/*
-t_vec2	abs_vec2(t_vec2 a, t_vec2 b)
-{
-	t_vec2	out;
 
-	out.x = abs(a.x - b.x)
-	out.y = abs(a.y - b.y);
-	return (out);
-}
-*/
 t_vec2	cmp_vec2(t_vec2 a, t_vec2 b)
 {
 	t_vec2	out;
