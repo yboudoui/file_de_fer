@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 18:21:13 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/14 18:41:22 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:35:24 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	draw_image(t_data *data)
 	double	pad;
 
 	pad = get_pad(data->map);
+	pad *= data->pad;
 	draw_row(pad, data->map, data->mlx->img);
 	draw_col(pad, data->map, data->mlx->img);
 }

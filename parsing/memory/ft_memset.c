@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory.h                                           :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yboudoui <yboudoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/06 16:18:51 by yboudoui          #+#    #+#             */
+/*   Created: 2022/03/01 14:52:42 by yboudoui          #+#    #+#             */
 /*   Updated: 2022/11/15 18:12:33 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MEMORY_H
-# define MEMORY_H
+#include "memory.h"
 
-# include <stdlib.h>
-# include <stddef.h>
+void	*ft_memset(void *s, int c, size_t n)
+{
+	char	*ptr;
 
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-void	*ft_memset(void *s, int c, size_t n);
-void	*ft_calloc(size_t nmemb, size_t size);
-#endif
+	ptr = s;
+	while (n--)
+		*ptr++ = c;
+	return (s);
+}

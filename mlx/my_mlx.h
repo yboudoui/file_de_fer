@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:00:50 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/14 18:43:05 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:21:40 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	image_put_pixel(t_image *data, int x, int y, int color);
 struct	s_data {
 	t_mlx	*mlx;
 	t_map	*map;
+	bool	redraw;
+	double	pad;
 };
 
 void	delete_data(void *data);

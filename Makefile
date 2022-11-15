@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2022/11/14 18:37:22 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/11/15 18:13:24 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS	=\
 ./parsing/atoi_words.c\
 ./parsing/file/file.c\
 ./parsing/memory/ft_memcpy.c\
+./parsing/memory/ft_memset.c\
 ./parsing/memory/ft_calloc.c\
 ./parsing/parsing.c\
 ./draw.c\

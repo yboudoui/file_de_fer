@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:00:38 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/07 19:15:05 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:23:56 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ t_data	*create_data(char *path, int width, int height)
 	out->mlx = create_mlx(path, width, height);
 	if (NULL == out)
 		return (delete_data(out), NULL);
+	out->pad = 1;
+	out->redraw = true;
 	return (out);
 }
