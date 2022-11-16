@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:17:12 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/15 18:21:45 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/16 08:16:05 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ t_image	*image_new(t_mlx *data, int width, int height)
 	return (out);
 }
 
+void	image_clear(t_image *img)
+{
+	size_t	size;
+
+	size = (img->width - 1) * (img->bits_per_pixel / 8);
+	size += (img->height - 1) * (img->line_length);
+	ft_memset(img->addr, 0, size);
+}
+
 void	image_put_pixel(t_image *data, int x, int y, int color)
 {
 	char	*dst;
@@ -49,4 +58,27 @@ void	image_put_pixel(t_image *data, int x, int y, int color)
 	y *= (data->line_length);
 	dst += (y + x);
 	*(unsigned int *)dst = color;
+}
+
+void	image_put_horizontal_line(t_image *data, int x1, int x2, int y, int color)
+{
+	char	*dst;
+	size_t	size;
+
+	if (y < 0 || y > data->height)
+		return ;
+	x1 *= (x1 >= 0);
+	x2 *= (x2 >= 0);
+	if (x1 > data->width)
+		x1 = data->width;
+	if (x2 > data->width)
+		x2 = data->width;
+	if (x1 == x2)
+		return ;
+	size = (abs(x1 - x2)) * (data->bits_per_pixel / 8);
+	dst = data->addr;
+	x1 *= (data->bits_per_pixel / 8);
+	y *= (data->line_length);
+	dst += (y + x1);
+	ft_memset(dst, color, size);
 }

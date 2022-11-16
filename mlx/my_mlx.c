@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:45:53 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/15 17:36:41 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/16 14:40:08 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ static int	close_callback(int keycode, void *data)
 {
 	t_mlx	*input;
 
+	if (keycode != 65307)
+		return (0);
 	input = data;
-	(void)keycode;
 	mlx_loop_end(input->mlx);
 	return (0);
 }
