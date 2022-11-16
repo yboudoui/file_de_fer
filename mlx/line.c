@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:13:05 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/16 15:32:07 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/16 18:06:38 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,8 @@ static bool	custom_bresenham_data_update(t_bresenham_data *in)
 	if (in->difference < in->derivative.x)
 	{
 		in->error += in->derivative.x;
-//		out.y = in->slop.y;
 		stop = true;
 	}
-//	in->current = add_vec2(in->current, out);
 	in->current.x += out.x;
 	return (stop);
 }
@@ -145,7 +143,6 @@ void	draw_line_step(t_image *img, t_bresenham_data *brd, int **tab)
 	(*tab)[0] = brd->current.x;
 	while (1)
 	{
-//		image_put_pixel(img, brd->current.x, brd->current.y, 0x00FF0000);
 		if (custom_bresenham_data_update(brd))
 			break ;
 	}
@@ -154,7 +151,6 @@ void	draw_line_step(t_image *img, t_bresenham_data *brd, int **tab)
 	(*tab) += 2;
 }
 
-#include <stdio.h>
 void	draw_quad(t_image *img, t_quad quad)
 {
 	t_bresenham_data	*brd;
@@ -193,16 +189,14 @@ void	draw_quad(t_image *img, t_quad quad)
 	index = min;
 	while (index < max)
 	{
-		draw_line(img, 0x000, (t_vec2){tmp[1] + 1, index}, (t_vec2){tmp[2] - 1, index});
-//		printf("%d %d	-	%d %d\n", tmp[0], tmp[1], tmp[2], tmp[3]);
+		draw_line(img, 0x2424243 , (t_vec2){tmp[1] + 1, index}, (t_vec2){tmp[2] - 1, index});
 		tmp += 4;
 		index++;
 	}
-	int	col = 0x008000;
+	int	col = 0xF5CB5C;
 	draw_line(img, col, quad.point[0], quad.point[1]);
 	draw_line(img, col, quad.point[1], quad.point[3]);
 	draw_line(img, col, quad.point[3], quad.point[2]);
 	draw_line(img, col, quad.point[2], quad.point[0]);
 	free(tab);
-//	exit(0);
 }

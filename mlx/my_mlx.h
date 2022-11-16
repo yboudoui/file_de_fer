@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:00:50 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/16 15:17:59 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:41:15 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ struct	s_data {
 	t_mlx	*mlx;
 	t_map	*map;
 	bool	redraw;
+	t_vec2	center;
 	double	pad;
 };
 

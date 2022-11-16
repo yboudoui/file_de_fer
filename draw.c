@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 18:21:13 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/16 15:36:21 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/16 18:15:45 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	draw_row(int pad, t_map *map, t_image *img)
 			start = end;
 			end = center_screen(transforme_vec2(center_map(map, pad, idx)));
 			end.y -= (map->map[idx.y]->array[idx.x] * pad);
-			draw_line(img, start, end);
+			draw_line(img, 0xFFF, start, end);
 			idx.x += 1;
 		}
 		idx.y += 1;
@@ -51,7 +51,7 @@ static void	draw_col(int pad, t_map *map, t_image *img)
 			start = end;
 			end = center_screen(transforme_vec2(center_map(map, pad, idx)));
 			end.y -= (map->map[idx.y]->array[idx.x] * pad);
-			draw_line(img, start, end);
+			draw_line(img, 0xFFF, start, end);
 			idx.y += 1;
 		}
 		idx.x += 1;
@@ -59,7 +59,22 @@ static void	draw_col(int pad, t_map *map, t_image *img)
 }
 */
 
-static void	draw(int pad, t_map *map, t_image *img)
+static t_vec2	transforme(t_map *map, int pad, t_vec2 center, t_vec2 idx)
+{
+	t_vec2	out;
+
+	out = center_screen(center);
+	out = 
+	out = transforme_vec2(center_map(map, pad, idx));
+	out.x += center.x;
+	out.y += center.y;
+
+//	out.x -= (WIDTH /2) - center.x ;
+//	out.y -= (HEIGHT /2) - center.y;
+	return (out);
+}
+
+static void	draw(int pad, t_vec2 center, t_map *map, t_image *img)
 {
 	t_vec2	start[2];
 	t_vec2	end[2];
@@ -69,18 +84,16 @@ static void	draw(int pad, t_map *map, t_image *img)
 	while (idx.x < (int)map->max_col - 1)
 	{
 		idx.y = 0;
-		end[0] = center_screen(transforme_vec2(center_map(map, pad, idx)));
-		end[1] = center_screen(transforme_vec2(center_map(map, pad, (t_vec2){idx.x + 1, idx.y})));
+		end[0] = transforme(map, pad, center, idx);
+		end[1] = transforme(map, pad, center, (t_vec2){idx.x + 1, idx.y});
 		while (idx.y < (int)map->max_row)
 		{
 			start[0] = end[0];
 			start[1] = end[1];
-			end[0] = center_screen(transforme_vec2(center_map(map, pad, idx)));
-			end[1] = center_screen(transforme_vec2(center_map(map, pad, (t_vec2){idx.x + 1, idx.y})));
+			end[0] = transforme(map, pad, center, idx);
+			end[1] = transforme(map, pad, center, (t_vec2){idx.x + 1, idx.y});
 			end[0].y -= (map->map[idx.y]->array[idx.x] * pad);
 			end[1].y -= (map->map[idx.y]->array[idx.x+1] * pad);
-
-
 			draw_quad(img, (t_quad){{
 					start[0], end[0], start[1], end[1],
 				}});
@@ -109,7 +122,7 @@ void	draw_image(t_data *data)
 
 	pad = get_pad(data->map);
 	pad *= data->pad;
-	draw(pad, data->map, data->mlx->img);
+	draw(pad, data->center, data->map, data->mlx->img);
 /*
 	draw_row(pad, data->map, data->mlx->img);
 	draw_col(pad, data->map, data->mlx->img);
