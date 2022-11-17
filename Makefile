@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2022/11/15 18:13:24 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/11/17 18:41:07 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,57 +14,65 @@ NAME				=	fdf
 
 CC					=	cc
 
-CFLAGS				=	-Wall -Wextra -Werror -g3
+CFLAGS				=	-Wall -Wextra -Werror
 
 RM					=	rm -f
 
 # **************************************************************************** #
 
 SRCS	=\
-./mlx/data.c\
-./mlx/my_mlx.c\
-./mlx/image.c\
-./mlx/line.c\
+./mlx/mlx_utils/vec2/vec2.c\
+./mlx/mlx_utils/line/line.c\
+./mlx/mlx_utils/quad/quad.c\
+./mlx/mlx_utils/quad/empty_quad.c\
+./mlx/mlx_utils/mlx_utils.c\
+./mlx/mlx_utils/image/image.c\
 ./main.c\
-./vec2/vec2.c\
+./parsing/utils/str/ft_strtrim.c\
+./parsing/utils/str/ft_strlen.c\
+./parsing/utils/str/ft_substr.c\
+./parsing/utils/str/ft_split.c\
+./parsing/utils/lst/source/ft_lst_remove_one.c\
+./parsing/utils/lst/source/ft_lstclear.c\
+./parsing/utils/lst/source/transform.c\
+./parsing/utils/lst/source/ft_lstmap.c\
+./parsing/utils/lst/source/add.c\
+./parsing/utils/lst/source/ft_lstlast.c\
 ./parsing/utils/is_charset/is_charset.c\
 ./parsing/utils/atoi_to.c\
+./parsing/utils/file/file.c\
+./parsing/utils/memory/ft_memcpy.c\
+./parsing/utils/memory/ft_calloc.c\
+./parsing/utils/memory/ft_memset.c\
 ./parsing/utils/int_array/int_array.c\
 ./parsing/utils/get_next_line/get_next_line_utils.c\
 ./parsing/utils/get_next_line/get_next_line.c\
-./parsing/str/ft_strtrim.c\
-./parsing/str/ft_strlen.c\
-./parsing/str/ft_substr.c\
-./parsing/str/ft_split.c\
-./parsing/lst/source/ft_lst_remove_one.c\
-./parsing/lst/source/ft_lstclear.c\
-./parsing/lst/source/transform.c\
-./parsing/lst/source/ft_lstmap.c\
-./parsing/lst/source/add.c\
-./parsing/lst/source/ft_lstlast.c\
+./parsing/data/data.c\
+./parsing/map/map.c\
 ./parsing/atoi_words.c\
-./parsing/file/file.c\
-./parsing/memory/ft_memcpy.c\
-./parsing/memory/ft_memset.c\
-./parsing/memory/ft_calloc.c\
 ./parsing/parsing.c\
-./draw.c\
-./transform.c\
+./draw/draw.c\
+./draw/transform.c\
 
 INCS	=\
-./\
-./mlx\
 ./mlx/mlx_linux\
-./vec2\
+./mlx/mlx_utils/image\
+./mlx/mlx_utils/vec2\
+./mlx/mlx_utils/line\
+./mlx/mlx_utils/quad\
+./mlx/mlx_utils\
+./parsing/utils/str\
+./parsing/utils/lst/include\
 ./parsing/utils/is_charset\
 ./parsing/utils\
+./parsing/utils/file\
+./parsing/utils/memory\
 ./parsing/utils/int_array\
 ./parsing/utils/get_next_line\
-./parsing/str\
-./parsing/lst/include\
+./parsing/data\
 ./parsing\
-./parsing/file\
-./parsing/memory\
+./parsing/map\
+./draw\
 
 # **************************************************************************** #
 

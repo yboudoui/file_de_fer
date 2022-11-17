@@ -6,11 +6,11 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:00:38 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/16 18:05:51 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/17 18:21:20 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_mlx.h"
+#include "data.h"
 
 void	delete_data(void *data)
 {

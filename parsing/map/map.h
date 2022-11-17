@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/06 16:30:06 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/17 18:25:52 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/11/17 17:58:45 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/11/17 18:26:12 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef MAP_H
+# define MAP_H
 
-# include <stdbool.h>
+# include "int_array.h"
+# include "utils.h"
+# include "vec2.h"
 
-bool	ft_atoi_to(char **str, int *result);
+typedef struct s_map {
+	size_t		max_row;
+	size_t		max_col;
+	t_vec2		max_height;
+	t_int_array	**map;
+}	t_map;
+
+t_map	*alloc_map(size_t len);
+void	free_map(void *data);
+
 #endif

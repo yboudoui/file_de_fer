@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   quad.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/06 16:30:06 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/17 18:25:52 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/11/17 17:35:23 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/11/17 18:34:31 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef QUAD_H
+# define QUAD_H
 
-# include <stdbool.h>
+# include <limits.h>
+# include "line.h"
 
-bool	ft_atoi_to(char **str, int *result);
+typedef struct s_quad {
+	t_vec2	point[4];
+}	t_quad;
+
+void	draw_quad(t_image *img, t_quad quad);
+void	draw_empty_quad(t_image *img, t_quad quad);
 #endif

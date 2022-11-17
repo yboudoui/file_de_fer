@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/06 16:30:06 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/17 18:25:52 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/11/17 17:48:34 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/11/17 18:25:21 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef DATA_H
+# define DATA_H
 
-# include <stdbool.h>
+# include "mlx_utils.h"
+# include "parsing.h"
+# include "map.h"
 
-bool	ft_atoi_to(char **str, int *result);
+typedef struct s_data {
+	t_mlx	*mlx;
+	t_map	*map;
+	bool	redraw;
+	t_vec2	center;
+	double	pad;
+}	t_data;
+
+void	delete_data(void *data);
+t_data	*create_data(char *path, int width, int height);
+
 #endif

@@ -6,11 +6,11 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:17:12 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/17 12:11:37 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/17 18:46:14 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_mlx.h"
+#include "image.h"
 
 void	delete_image(t_image *img)
 {
@@ -43,8 +43,6 @@ void	image_clear(t_image *img)
 	size = (img->width - 1) * (img->bits_per_pixel / 8);
 	size += (img->height - 1) * (img->line_length);
 	ft_bzero(img->addr, size);
-
-//	ft_memset(img->addr, 0, size);
 }
 
 void	image_put_pixel(t_image *data, int x, int y, int color)
@@ -62,29 +60,29 @@ void	image_put_pixel(t_image *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	image_put_horizontal_line(t_image *data, int x1, int x2, int y, int color)
+void	image_put_horizontal_line(t_image *data, int x[2], int y, int color)
 {
 	char	*dst;
 	size_t	size;
 
 	if (y < 0 || y > data->height)
 		return ;
-	x1 *= (x1 >= 0);
-	x2 *= (x2 >= 0);
-	if (x1 >= data->width)
-		x1 = data->width;
-	if (x2 >= data->width)
-		x2 = data->width;
-	if (x1 == x2)
+	x[0] *= (x[0] >= 0);
+	x[1] *= (x[1] >= 0);
+	if (x[0] >= data->width)
+		x[0] = data->width;
+	if (x[1] >= data->width)
+		x[1] = data->width;
+	if (x[0] == x[1])
 		return ;
-	x1 *= (data->bits_per_pixel / 8);
-	x2 *= (data->bits_per_pixel / 8);
-	size = abs(x2 - x1);
+	x[0] *= (data->bits_per_pixel / 8);
+	x[1] *= (data->bits_per_pixel / 8);
+	size = abs(x[1] - x[0]);
 	dst = data->addr;
 	y *= (data->line_length);
-	if (x1 < x2)
-		dst += (y + x1);
+	if (x[0] < x[1])
+		dst += (y + x[0]);
 	else
-		dst += (y + x2);
+		dst += (y + x[1]);
 	ft_memset(dst, color, size);
 }
