@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:13:05 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/16 18:06:38 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/17 12:40:05 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	draw_line(t_image *img, int color, t_vec2 start, t_vec2 end)
 
 
 
-
 static int	max_iteration(t_quad quad, int *min, int *max)
 {
 	size_t	index;
@@ -111,10 +110,6 @@ static bool	custom_bresenham_data_update(t_bresenham_data *in)
 	t_vec2	out;
 	bool	stop;
 
-	
-	if (in->current.x == in->end.x)
-		return (true);
-
 	stop = false;
 	out = (t_vec2){0};
 	in->difference = (in->error * 2);
@@ -132,23 +127,16 @@ static bool	custom_bresenham_data_update(t_bresenham_data *in)
 	return (stop);
 }
 
-void	draw_line_step(t_image *img, t_bresenham_data *brd, int **tab)
+bool	draw_line_step(t_bresenham_data *brd, int *tab)
 {
-	(void)img;
 	if (brd->start.y >= brd->current.y || brd->current.y > brd->end.y)
-	{
-		brd->current.y += 1;
-		return ;
-	}
-	(*tab)[0] = brd->current.x;
+		return (brd->current.y += 1, false);
+	tab[0] = brd->current.x;
 	while (1)
-	{
 		if (custom_bresenham_data_update(brd))
 			break ;
-	}
-	(*tab)[1] = brd->current.x;
-	brd->current.y += 1;
-	(*tab) += 2;
+	tab[1] = brd->current.x;
+	return (brd->current.y += 1, true);
 }
 
 void	draw_quad(t_image *img, t_quad quad)
@@ -157,13 +145,10 @@ void	draw_quad(t_image *img, t_quad quad)
 	int	loop;
 	int	min;
 	int	max;
-	int	*tab;
-	int	max_it;
 	int	index;
-	int	*tmp;
+	int	tmp[4];
 
-	max_it = max_iteration(quad, &min, &max);
-
+	max_iteration(quad, &min, &max);
 	brd = (t_bresenham_data [4]) {
 	[0] = bresenham_data_init(quad.point[0], quad.point[1]),
 	[1] = bresenham_data_init(quad.point[1], quad.point[3]),
@@ -173,30 +158,24 @@ void	draw_quad(t_image *img, t_quad quad)
 	index = 0;
 	while (index < 4)
 		brd[index++].current.y = min;
-	tab = ft_calloc(max_it, (sizeof(int) * 8));
-	if (NULL == tab)
-		return ;
-	tmp = tab;
-	index = 0;
-	while (index < max_it)
+	tmp[1] = quad.point[0].x;
+	tmp[3] = quad.point[0].x;
+	while (min < max)
 	{
 		loop = 0;
-		while (loop < 4)
-			draw_line_step(img, &brd[loop++], &tmp);
-		index++;
+		index = 0;
+		while (loop < 4 && index != 4)
+		{
+			if (draw_line_step(&brd[loop], &tmp[index]))
+				index += 2;
+			loop++;
+		}
+		image_put_horizontal_line(img, tmp[1], tmp[3], min, 0);
+		min++;
 	}
-	tmp = tab;
-	index = min;
-	while (index < max)
-	{
-		draw_line(img, 0x2424243 , (t_vec2){tmp[1] + 1, index}, (t_vec2){tmp[2] - 1, index});
-		tmp += 4;
-		index++;
-	}
-	int	col = 0xF5CB5C;
+	int	col = 0x006400;
 	draw_line(img, col, quad.point[0], quad.point[1]);
 	draw_line(img, col, quad.point[1], quad.point[3]);
 	draw_line(img, col, quad.point[3], quad.point[2]);
 	draw_line(img, col, quad.point[2], quad.point[0]);
-	free(tab);
 }

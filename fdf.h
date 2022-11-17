@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 18:33:34 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/16 17:25:49 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/17 12:42:34 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "my_mlx.h"
 # include "parsing.h"
 
-# define WIDTH 400
-# define HEIGHT 600
+# define WIDTH 1200
+# define HEIGHT 900
 
 # include <math.h>
 

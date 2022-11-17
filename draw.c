@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 18:21:13 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/16 18:15:45 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/16 18:54:51 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,9 @@ static t_vec2	transforme(t_map *map, int pad, t_vec2 center, t_vec2 idx)
 	t_vec2	out;
 
 	out = center_screen(center);
-	out = 
 	out = transforme_vec2(center_map(map, pad, idx));
 	out.x += center.x;
 	out.y += center.y;
-
-//	out.x -= (WIDTH /2) - center.x ;
-//	out.y -= (HEIGHT /2) - center.y;
 	return (out);
 }
 

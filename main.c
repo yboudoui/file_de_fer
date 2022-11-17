@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:51:33 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/16 18:13:09 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/17 10:45:18 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,8 @@ int	main(int ac, char *av[])
 	out = create_data(av[1], WIDTH, HEIGHT);
 	if (NULL == out)
 		return (-2);
-
 	mlx_mouse_hook(out->mlx->win, mouse_event, out);
-
-	mlx_hook(out->mlx->win, 6, 1L<<8, mousse, out);
-
+	mlx_hook(out->mlx->win, 6, 1L << 8, mousse, out);
 	mlx_loop_hook(out->mlx->mlx, draw, out);
 	mlx_loop(out->mlx->mlx);
 	return (delete_data(out), 0);
