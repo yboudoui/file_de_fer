@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 18:33:34 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/17 18:27:26 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/20 19:13:03 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "mlx_utils.h"
 # include "parsing.h"
 # include "data.h"
-# include "quad.h"
+# include "image.h"
 
 # define WIDTH 1200
 # define HEIGHT 900

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:25:11 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/17 17:54:20 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/20 19:16:59 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,15 @@ t_vec2	substract_vec2(t_vec2 a, t_vec2 b)
 
 	out.x = a.x - b.x;
 	out.y = a.y - b.y;
+	return (out);
+}
+
+t_vec2	mul_vec2(t_vec2 a, t_vec2 b)
+{
+	t_vec2	out;
+
+	out.x = a.x * b.x;
+	out.y = a.y * b.y;
 	return (out);
 }
 

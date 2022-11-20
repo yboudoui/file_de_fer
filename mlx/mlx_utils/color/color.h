@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quad.h                                             :+:      :+:    :+:   */
+/*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 17:35:23 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/17 18:34:31 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/11/20 13:28:32 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/11/20 19:16:56 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef QUAD_H
-# define QUAD_H
+#ifndef COLOR_H
+# define COLOR_H
 
-# include <limits.h>
-# include "line.h"
+typedef enum e_chanel_name {
+	BLUE,
+	GREEN,
+	RED,
+	TRANSPARENCY,
+}	t_chanel_name;
 
-typedef struct s_quad {
-	t_vec2	point[4];
-}	t_quad;
+typedef unsigned char	t_chanel;
 
-void	draw_quad(t_image *img, t_quad quad);
-void	draw_empty_quad(t_image *img, t_quad quad);
+typedef union u_color {
+	unsigned char	chanel[4];
+	unsigned int	raw;
+}	t_color;
+
+t_color	create_trgb(t_chanel t, t_chanel r, t_chanel g, t_chanel b);
+t_color	interpolate_color(t_color a, float t, t_color b);
+
 #endif

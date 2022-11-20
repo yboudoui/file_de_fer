@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:51:33 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/17 18:28:21 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/20 20:27:17 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ int	draw(t_data *data)
 {
 	if (data->redraw == true)
 	{
-		image_clear(data->mlx->img);
 		draw_image(data);
+		image_clear(data->mlx->img);
+		down_sample(data->img, data->mlx->img);
 		data->redraw = false;
 	}
 	mlx_put_image_to_window(data->mlx->mlx, data->mlx->win,

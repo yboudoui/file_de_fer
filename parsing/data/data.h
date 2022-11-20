@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 17:48:34 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/17 18:25:21 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/20 19:18:59 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct s_data {
 	t_mlx	*mlx;
 	t_map	*map;
+	t_image	*img;
 	bool	redraw;
 	t_vec2	center;
 	double	pad;

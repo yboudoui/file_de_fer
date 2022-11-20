@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 16:52:03 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/17 18:00:32 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/20 17:18:30 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,27 @@ int	max_height(t_int_array *input)
 	return (max);
 }
 
+void	set_min_max_height(t_map *map)
+{
+	size_t	index;
+	int		min;
+	int		max;
+
+	if (NULL == map)
+		return ;
+	index = 0;
+	while (index < map->max_row)
+	{
+		get_min_max(*map->map[index], &min, &max);
+		if (map->min_height > min)
+			map->min_height = min;
+		if (map->max_height < max)
+			map->max_height = max;
+		index++;
+	}
+	map->height = (map->max_height - map->min_height);
+}
+
 t_map	*parse_map(char *path)
 {
 	t_list	*lst;
@@ -84,5 +105,6 @@ t_map	*parse_map(char *path)
 		index += 1;
 		current = current->next;
 	}
+	set_min_max_height(output);
 	return (lst_clear(&lst, NULL), output);
 }

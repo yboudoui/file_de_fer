@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   empty_quad.c                                       :+:      :+:    :+:   */
+/*   line.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 18:02:48 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/17 18:18:02 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/11/20 18:53:12 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/11/20 19:13:32 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "quad.h"
+#include "image.h"
 
-#define COLOR 0x006400
-
-void	draw_empty_quad(t_image *img, t_quad quad)
+inline void	image_put_line(t_image *img, t_pixel start, t_pixel end)
 {
-	draw_line(img, COLOR, quad.point[0], quad.point[1]);
-	draw_line(img, COLOR, quad.point[1], quad.point[3]);
-	draw_line(img, COLOR, quad.point[3], quad.point[2]);
-	draw_line(img, COLOR, quad.point[2], quad.point[0]);
+	t_bresenham_data	brd;
+
+	brd = bresenham_data_init(start, end);
+	while (1)
+	{
+		image_put_pixel(img, brd.current);
+		if (1
+		&& brd.current.coord.x == brd.end.coord.x
+		&& brd.current.coord.y == brd.end.coord.y
+		)
+		break ;
+		bresenham_data_update(&brd);
+	}
 }

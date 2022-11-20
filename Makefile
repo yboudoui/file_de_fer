@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2022/11/17 18:41:07 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/11/20 20:34:53 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,19 +14,21 @@ NAME				=	fdf
 
 CC					=	cc
 
-CFLAGS				=	-Wall -Wextra -Werror
+CFLAGS				=	-Wall -Wextra -Werror -O3
 
 RM					=	rm -f
 
 # **************************************************************************** #
 
 SRCS	=\
+./mlx/mlx_utils/color/color.c\
 ./mlx/mlx_utils/vec2/vec2.c\
 ./mlx/mlx_utils/line/line.c\
-./mlx/mlx_utils/quad/quad.c\
-./mlx/mlx_utils/quad/empty_quad.c\
 ./mlx/mlx_utils/mlx_utils.c\
+./mlx/mlx_utils/image/quad.c\
+./mlx/mlx_utils/image/triangle.c\
 ./mlx/mlx_utils/image/image.c\
+./mlx/mlx_utils/image/line.c\
 ./main.c\
 ./parsing/utils/str/ft_strtrim.c\
 ./parsing/utils/str/ft_strlen.c\
@@ -56,11 +58,11 @@ SRCS	=\
 
 INCS	=\
 ./mlx/mlx_linux\
-./mlx/mlx_utils/image\
+./mlx/mlx_utils/color\
 ./mlx/mlx_utils/vec2\
 ./mlx/mlx_utils/line\
-./mlx/mlx_utils/quad\
 ./mlx/mlx_utils\
+./mlx/mlx_utils/image\
 ./parsing/utils/str\
 ./parsing/utils/lst/include\
 ./parsing/utils/is_charset\
