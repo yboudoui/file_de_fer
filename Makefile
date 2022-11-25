@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2022/11/20 20:34:53 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/11/25 12:15:47 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,11 @@ NAME				=	fdf
 
 CC					=	cc
 
-CFLAGS				=	-Wall -Wextra -Werror -O3
+FLAGS_MANDATORY		=	-Wall -Wextra -Werror
+EXTRA_FLAG			=	-g3
+BONUS_FLAG			=	-Ofast -flto=full
+
+CFLAGS				=	$(FLAGS_MANDATORY) $(BONUS_FLAG) #$(EXTRA_FLAG)
 
 RM					=	rm -f
 
@@ -25,6 +29,7 @@ SRCS	=\
 ./mlx/mlx_utils/vec2/vec2.c\
 ./mlx/mlx_utils/line/line.c\
 ./mlx/mlx_utils/mlx_utils.c\
+./mlx/mlx_utils/event.c\
 ./mlx/mlx_utils/image/quad.c\
 ./mlx/mlx_utils/image/triangle.c\
 ./mlx/mlx_utils/image/image.c\
@@ -36,9 +41,9 @@ SRCS	=\
 ./parsing/utils/str/ft_split.c\
 ./parsing/utils/lst/source/ft_lst_remove_one.c\
 ./parsing/utils/lst/source/ft_lstclear.c\
-./parsing/utils/lst/source/transform.c\
 ./parsing/utils/lst/source/ft_lstmap.c\
 ./parsing/utils/lst/source/add.c\
+./parsing/utils/lst/source/create.c\
 ./parsing/utils/lst/source/ft_lstlast.c\
 ./parsing/utils/is_charset/is_charset.c\
 ./parsing/utils/atoi_to.c\
@@ -51,6 +56,7 @@ SRCS	=\
 ./parsing/utils/get_next_line/get_next_line.c\
 ./parsing/data/data.c\
 ./parsing/map/map.c\
+./parsing/map/getter.c\
 ./parsing/atoi_words.c\
 ./parsing/parsing.c\
 ./draw/draw.c\
@@ -81,7 +87,7 @@ INCS	=\
 OBJS				=	$(SRCS:.c=.o)
 
 .c.o:
-	$(CC) $(CFLAGS)	\
+	@$(CC) $(CFLAGS)	\
 		$(addprefix -I , $(INCS))	\
 		-c $<	\
 		-o $(<:.c=.o)	
@@ -89,7 +95,11 @@ OBJS				=	$(SRCS:.c=.o)
 
 $(NAME):	$(OBJS)
 			$(MAKE) all -C mlx/mlx_linux
-			$(CC) $(OBJS) -L mlx/mlx_linux -lmlx_Linux -lmlx -lXext -lX11 -lm -o $(NAME)
+#			$(CC) $(OBJS) -L mlx/mlx_linux -lmlx_Linux -lmlx -lXext -lX11 -lm -o $(NAME)
+			$(CC) -Ofast -flto=full $(OBJS) -L mlx/mlx_linux -lmlx_Linux -lmlx -lXext -lX11 -lm -o $(NAME)
+
+bonus:		
+			$(MAKE) all -C . EXTRA_FLAG=$(EXTRA_FLAG)
 
 all:		$(NAME)
 
@@ -103,6 +113,6 @@ fclean:		clean
 re:			fclean all
 
 valgrind:	all
-			valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) ./asset/42.fdf
+			valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) ./asset/mars.fdf
 
 .PHONY:		all clean fclean re

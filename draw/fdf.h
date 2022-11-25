@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 18:33:34 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/20 19:13:03 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/24 17:11:06 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,15 @@
 # include "data.h"
 # include "image.h"
 
-# define WIDTH 1200
-# define HEIGHT 900
+//# define WIDTH 1920
+//# define HEIGHT 1080
 
+# define WIDTH 2560
+# define HEIGHT 1440
+/*
+# define WIDTH 800
+# define HEIGHT 600
+*/
 # include <math.h>
 
 t_vec2	transforme_vec2(t_vec2 in);

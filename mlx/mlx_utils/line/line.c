@@ -6,11 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:13:05 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/20 19:16:50 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:28:29 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line.h"
+#include <stdlib.h>
 
 inline static void	set_interpolation(t_bresenham_data *in)
 {
@@ -66,9 +67,9 @@ inline void	bresenham_data_update(t_bresenham_data *in)
 	}
 	in->current.coord = add_vec2(in->current.coord, out);
 	in->current.color = interpolate_color(
-				in->start.color,
-				in->color_interpolation.current,
-				in->end.color
-	);
+			in->start.color,
+			in->color_interpolation.current,
+			in->end.color
+			);
 	in->color_interpolation.current += in->color_interpolation.pad;
 }

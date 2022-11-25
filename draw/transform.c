@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 18:25:26 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/17 17:41:33 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/23 11:58:31 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ t_vec2	center_screen(t_vec2 in)
 
 t_vec2	center_map(t_map *map, int pad, t_vec2 in)
 {
-	in.x -= map->max_col / 2;
-	in.y -= map->max_row / 2;
+	in.x -= map->size.x / 2;
+	in.y -= map->size.y / 2;
 	in.x *= pad;
 	in.y *= pad;
 	return (in);

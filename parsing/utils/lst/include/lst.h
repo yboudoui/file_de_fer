@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 14:58:26 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/06 18:46:52 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/23 09:32:14 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	lst_iter(t_list *lst, void (*f)(void *));
 
 t_list	*lst_last(t_list *lst);
 
-void	lst_add_back(t_list **lst, t_list *new);
-void	lst_add_front(t_list **lst, t_list *new);
+bool	lst_add_back(t_list **lst, t_list *new);
+bool	lst_add_front(t_list **lst, t_list *new);
 
-bool	lst_create_back(t_list **lst, void *data);
+bool	lst_create_back(t_list **lst, void *content);
 
 typedef bool	(*t_fp_iterator)(void**);
 typedef void	(*t_fp_deletion)(void *);

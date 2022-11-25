@@ -6,23 +6,34 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:00:38 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/20 20:40:08 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/24 18:03:54 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
+#include <math.h>
 
-//#define SCALE 2.7
-
-void	delete_data(void *data)
+void	delete_data(t_data *data)
 {
-	t_data	*input;
+	if (NULL == data)
+		return ;
+	delete_image(data->img);
+	free_map(data->map);
+	delete_mlx(data->mlx);
+	free(data);
+}
 
-	input = data;
-	delete_image(input->img);
-	free_map(input->map);
-	delete_mlx(input->mlx);
-	free(input);
+static double	get_pad(t_image *img, t_map *map)
+{
+	double	hypothenuse;
+	double	min;
+
+	hypothenuse = sqrt(pow(map->size.x, 2) + pow(map->size.y, 2));
+	min = img->height;
+	if (img->width < img->height)
+		min = img->width;
+	min -= 20;
+	return (min / hypothenuse);
 }
 
 t_data	*create_data(char *path, int width, int height)
@@ -38,13 +49,9 @@ t_data	*create_data(char *path, int width, int height)
 	out->mlx = create_mlx(path, width, height);
 	if (NULL == out)
 		return (delete_data(out), NULL);
-
-	float SCALE = 2.7f;
-	out->img = image_new(out->mlx, width * SCALE, height * SCALE);
-	out->pad = 1;
-	out->redraw = true;
-	out->center = (t_vec2){
-		out->img->width / 2, out->img->height / 2
-	};
+	out->img = image_new(out->mlx, width, height);
+	out->pad = get_pad(out->img, out->map);
+	out->height = 0.1f;
+	out->center = (t_vec2){width / 2, height / 2};
 	return (out);
 }

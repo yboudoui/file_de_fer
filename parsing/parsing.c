@@ -6,13 +6,13 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 16:52:03 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/20 17:18:30 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/24 18:10:50 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static void	*parse_line(void *line)
+static void	*parse_line(char *line)
 {
 	char		*trimed;
 	char		**splited_space;
@@ -32,79 +32,33 @@ static void	*parse_line(void *line)
 	return (output);
 }
 
-static t_list	*parse_file(char *path)
+static void	interpolate_height(t_map *map)
 {
-	t_list		*output;
-	t_list		*lines;
-
-	lines = read_file(path, O_RDONLY);
-	if (NULL == lines)
-		return (NULL);
-	output = lst_map(lines, parse_line, free_int_array);
-	lst_clear(&lines, free);
-	return (output);
-}
-
-int	max_height(t_int_array *input)
-{
-	size_t	index;
-	int		max;
-
-	index = 0;
-	max = 0;
-	while (index < input->len)
-	{
-		if (max < input->array[index])
-			max = input->array[index];
-		index++;
-	}
-	return (max);
-}
-
-void	set_min_max_height(t_map *map)
-{
-	size_t	index;
-	int		min;
-	int		max;
+	size_t			index;
+	float			height;
 
 	if (NULL == map)
 		return ;
 	index = 0;
-	while (index < map->max_row)
+	while (index < map->data->len)
 	{
-		get_min_max(*map->map[index], &min, &max);
-		if (map->min_height > min)
-			map->min_height = min;
-		if (map->max_height < max)
-			map->max_height = max;
+		height = map->data->array[index];
+		height /= map->size.z;
+		if (map->size.z == 0)
+			height = 0;
+		map->color->array[index] = interpolate_color(
+				map->palette[0], height, map->palette[1]).raw;
 		index++;
 	}
-	map->height = (map->max_height - map->min_height);
 }
 
 t_map	*parse_map(char *path)
 {
-	t_list	*lst;
+	t_list	*lines;
 	t_map	*output;
-	t_list	*current;
-	int		index;
 
-	lst = parse_file(path);
-	if (NULL == lst)
-		return (NULL);
-	output = alloc_map(lst_size(lst));
-	if (NULL == output)
-		return (lst_clear(&lst, free_int_array), NULL);
-	index = 0;
-	current = lst;
-	while (current)
-	{
-		output->map[index] = current->content;
-		if (output->max_col < output->map[index]->len)
-			output->max_col = output->map[index]->len;
-		index += 1;
-		current = current->next;
-	}
-	set_min_max_height(output);
-	return (lst_clear(&lst, NULL), output);
+	lines = read_file(path, O_RDONLY, parse_line, free_int_array);
+	output = init_map(lines);
+	interpolate_height(output);
+	return (lst_clear(&lines, free_int_array), output);
 }

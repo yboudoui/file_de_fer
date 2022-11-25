@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 17:37:16 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/20 19:57:26 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:28:35 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,11 @@ typedef struct s_quad {
 	t_pixel	point[2][2];
 }	t_quad;
 
-
-
 void	down_sample(t_image *in, t_image *out);
 
 t_image	*image_new(t_mlx *data, int width, int height);
 void	delete_image(t_image *img);
-void	image_clear(t_image *img);
-
-void	image_put_horizontal_line(t_image *data, int x[2], int y, int color);
+void	image_clear(t_image *img, t_color color);
 
 void	image_put_pixel(t_image *img, t_pixel pixel);
 void	image_put_line(t_image *img, t_pixel start, t_pixel end);
