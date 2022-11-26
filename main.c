@@ -6,41 +6,12 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:51:33 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/24 18:03:48 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:26:14 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //http://www.cs.yale.edu/homes/aspnes/classes/223/notes.html
 #include "fdf.h"
-
-bool	update_state(t_data *data)
-{
-	if (data->mlx->event.keyboard.escape == true)
-		return (mlx_loop_end(data->mlx->mlx), false);
-	if (data->mlx->event.keyboard.control_key)
-	{
-		if (data->mlx->event.mouse.scrol_up)
-			data->height += 0.03f;
-		if (data->mlx->event.mouse.scrol_down)
-			data->height -= 0.03f;
-		data->mlx->event.mouse.scrol_up = false;
-		data->mlx->event.mouse.scrol_down = false;
-		return (true);
-	}
-	else
-	{
-		if (data->mlx->event.mouse.scrol_up)
-			data->pad *= (1.5f);
-		if (data->mlx->event.mouse.scrol_down)
-			data->pad *= (0.5f);
-		if (data->pad < 1.0f)
-			data->pad = 1.0f;
-		data->mlx->event.mouse.scrol_up = false;
-		data->mlx->event.mouse.scrol_down = false;
-		return (true);
-	}
-	return (false);
-}
 
 int	draw(t_data *data)
 {

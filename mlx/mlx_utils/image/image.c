@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:17:12 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/24 15:29:06 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:38:30 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ void	image_clear(t_image *img, t_color color)
 
 	size = (img->width - 1) * (img->bits_per_pixel / 8);
 	size += (img->height - 1) * (img->line_length);
-	ft_memset(img->addr, color.raw, size);
+	if (BONUS)
+		memset(img->addr, color.raw, size);
+	else
+		ft_memset(img->addr, color.raw, size);
 }
 
 inline void	image_put_pixel(t_image *img, t_pixel pixel)

@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:00:38 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/24 18:03:54 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:11:32 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_data	*create_data(char *path, int width, int height)
 	if (NULL == out->map)
 		return (delete_data(out), NULL);
 	out->mlx = create_mlx(path, width, height);
-	if (NULL == out)
+	if (NULL == out->mlx)
 		return (delete_data(out), NULL);
 	out->img = image_new(out->mlx, width, height);
 	out->pad = get_pad(out->img, out->map);

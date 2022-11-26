@@ -6,13 +6,11 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 18:21:13 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/25 12:17:40 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:41:38 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-#define NO_BONUS 1
 
 static t_vec2	transforme(t_data *data, t_vec2 idx)
 {
@@ -41,13 +39,14 @@ static void	transforme_quad(t_quad *quad, t_data *data, t_vec2 idx)
 
 static inline void	drawer(t_data *data, t_quad quad)
 {
-/*
-	if (NO_BONUS)
+	if (!BONUS)
 		return ((void)image_put_empty_quad(data->img, quad));
-*/
-	image_put_quad(data->img, quad);
-//	image_put_empty_quad(data->img, quad);
-//	image_put_pixel(data->img, quad.point[0][0]);
+	if (data->mode == 0)
+		image_put_pixel(data->img, quad.point[0][0]);
+	else if (data->mode == 1)
+		image_put_quad(data->img, quad);
+	else
+		image_put_empty_quad(data->img, quad);
 }
 
 void	draw_image(t_data *data)

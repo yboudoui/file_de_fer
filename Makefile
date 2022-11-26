@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2022/11/25 12:15:47 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/11/26 14:27:00 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,9 @@ NAME				=	fdf
 
 CC					=	cc
 
-FLAGS_MANDATORY		=	-Wall -Wextra -Werror
-EXTRA_FLAG			=	-g3
-BONUS_FLAG			=	-Ofast -flto=full
+EXTRA_FLAG			=
 
-CFLAGS				=	$(FLAGS_MANDATORY) $(BONUS_FLAG) #$(EXTRA_FLAG)
+CFLAGS				=	-Wall -Wextra -Werror $(EXTRA_FLAG)
 
 RM					=	rm -f
 
@@ -60,6 +58,7 @@ SRCS	=\
 ./parsing/atoi_words.c\
 ./parsing/parsing.c\
 ./draw/draw.c\
+./draw/event_state.c\
 ./draw/transform.c\
 
 INCS	=\
@@ -91,28 +90,29 @@ OBJS				=	$(SRCS:.c=.o)
 		$(addprefix -I , $(INCS))	\
 		-c $<	\
 		-o $(<:.c=.o)	
-	@echo $<
+	@echo $(CC) $(CFLAGS) $<
 
 $(NAME):	$(OBJS)
-			$(MAKE) all -C mlx/mlx_linux
-#			$(CC) $(OBJS) -L mlx/mlx_linux -lmlx_Linux -lmlx -lXext -lX11 -lm -o $(NAME)
-			$(CC) -Ofast -flto=full $(OBJS) -L mlx/mlx_linux -lmlx_Linux -lmlx -lXext -lX11 -lm -o $(NAME)
-
-bonus:		
-			$(MAKE) all -C . EXTRA_FLAG=$(EXTRA_FLAG)
+			@$(MAKE) -si all -C mlx/mlx_linux
+			@$(CC) $(CFLAGS) $(OBJS) -L mlx/mlx_linux -lmlx_Linux -lmlx -lXext -lX11 -lm -o $(NAME)
 
 all:		$(NAME)
 
 clean:
-			$(MAKE) clean -C mlx/mlx_linux
-			$(RM) $(OBJS)
+			@$(MAKE) -si clean -C mlx/mlx_linux
+			@$(RM) $(OBJS)
 
 fclean:		clean
-			$(RM) $(NAME)
+			@$(RM) $(NAME)
 
 re:			fclean all
 
-valgrind:	all
-			valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) ./asset/mars.fdf
+bonus:		fclean
+			@$(MAKE) -si all -C mlx/mlx_linux
+			@$(MAKE) all -C . EXTRA_FLAG="-Ofast -flto=full -DBONUS"
+
+valgrind:	fclean
+			@$(MAKE) all -C . EXTRA_FLAG="-g3"
+			valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) ./asset/42.fdf
 
 .PHONY:		all clean fclean re

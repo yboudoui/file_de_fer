@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:00:50 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/24 16:48:26 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:27:26 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_image	t_image;
 typedef struct s_keyboard {
 	bool	control_key;
 	bool	escape;
+	bool	enter;
 }	t_keyboard;
 
 typedef struct s_mouse {

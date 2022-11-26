@@ -6,7 +6,7 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:46:04 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/24 16:48:27 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:28:49 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static int	key_press(int keycode, t_mlx *data)
 {
 	if (keycode == 65507 || keycode == 65508)
 		data->event.keyboard.control_key = true;
+	if (keycode == 65293)
+		data->event.keyboard.enter = true;
 	if (keycode == 65307)
 		data->event.keyboard.escape = true;
 	return (0);
@@ -31,6 +33,8 @@ static int	key_release(int keycode, t_mlx *data)
 {
 	if (keycode == 65507 || keycode == 65508)
 		data->event.keyboard.control_key = false;
+	if (keycode == 65293)
+		data->event.keyboard.enter = false;
 	if (keycode == 65307)
 		data->event.keyboard.escape = false;
 	return (0);
