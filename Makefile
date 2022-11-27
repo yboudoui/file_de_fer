@@ -6,7 +6,7 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2022/11/26 14:27:00 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/11/27 14:41:21 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,105 +14,138 @@ NAME				=	fdf
 
 CC					=	cc
 
-EXTRA_FLAG			=
+EXTRA_FLAG			=	-Ofast -flto=full -DBONUS
 
-CFLAGS				=	-Wall -Wextra -Werror $(EXTRA_FLAG)
+CFLAGS				=	-Wall -Wextra -Werror
 
 RM					=	rm -f
 
-# **************************************************************************** #
+MLX_DIR				=	mlx_linux
 
-SRCS	=\
-./mlx/mlx_utils/color/color.c\
-./mlx/mlx_utils/vec2/vec2.c\
-./mlx/mlx_utils/line/line.c\
-./mlx/mlx_utils/mlx_utils.c\
-./mlx/mlx_utils/event.c\
-./mlx/mlx_utils/image/quad.c\
-./mlx/mlx_utils/image/triangle.c\
-./mlx/mlx_utils/image/image.c\
-./mlx/mlx_utils/image/line.c\
-./main.c\
-./parsing/utils/str/ft_strtrim.c\
-./parsing/utils/str/ft_strlen.c\
-./parsing/utils/str/ft_substr.c\
-./parsing/utils/str/ft_split.c\
-./parsing/utils/lst/source/ft_lst_remove_one.c\
-./parsing/utils/lst/source/ft_lstclear.c\
-./parsing/utils/lst/source/ft_lstmap.c\
-./parsing/utils/lst/source/add.c\
-./parsing/utils/lst/source/create.c\
-./parsing/utils/lst/source/ft_lstlast.c\
-./parsing/utils/is_charset/is_charset.c\
-./parsing/utils/atoi_to.c\
-./parsing/utils/file/file.c\
-./parsing/utils/memory/ft_memcpy.c\
-./parsing/utils/memory/ft_calloc.c\
-./parsing/utils/memory/ft_memset.c\
-./parsing/utils/int_array/int_array.c\
-./parsing/utils/get_next_line/get_next_line_utils.c\
-./parsing/utils/get_next_line/get_next_line.c\
-./parsing/data/data.c\
-./parsing/map/map.c\
-./parsing/map/getter.c\
-./parsing/atoi_words.c\
-./parsing/parsing.c\
-./draw/draw.c\
-./draw/event_state.c\
-./draw/transform.c\
+LINK				=	-L $(MLX_DIR) -lmlx_Linux -lmlx -lXext -lX11 -lm
 
-INCS	=\
-./mlx/mlx_linux\
-./mlx/mlx_utils/color\
-./mlx/mlx_utils/vec2\
-./mlx/mlx_utils/line\
-./mlx/mlx_utils\
-./mlx/mlx_utils/image\
-./parsing/utils/str\
-./parsing/utils/lst/include\
-./parsing/utils/is_charset\
-./parsing/utils\
-./parsing/utils/file\
-./parsing/utils/memory\
-./parsing/utils/int_array\
-./parsing/utils/get_next_line\
-./parsing/data\
-./parsing\
-./parsing/map\
-./draw\
 
 # **************************************************************************** #
 
-OBJS				=	$(SRCS:.c=.o)
+SRCS				=														\
+mlx_utils/color/color.c														\
+mlx_utils/vec2/vec2.c														\
+mlx_utils/event/window/window.c												\
+mlx_utils/event/event.c														\
+mlx_utils/event/keyboard/keyboard.c											\
+mlx_utils/event/mouse/mouse.c												\
+mlx_utils/line/line.c														\
+mlx_utils/mlx_utils.c														\
+mlx_utils/image/quad.c														\
+mlx_utils/image/triangle.c													\
+mlx_utils/image/image.c														\
+mlx_utils/image/line.c														\
+utils/str/ft_strtrim.c														\
+utils/str/ft_strncmp.c														\
+utils/str/ft_strlen.c														\
+utils/str/ft_substr.c														\
+utils/str/ft_split.c														\
+utils/lst/source/ft_lst_remove_one.c										\
+utils/lst/source/ft_lstclear.c												\
+utils/lst/source/ft_lstmap.c												\
+utils/lst/source/add.c														\
+utils/lst/source/create.c													\
+utils/lst/source/ft_lstlast.c												\
+utils/is_charset/is_charset.c												\
+utils/atoi_to.c																\
+utils/file/file.c															\
+utils/memory/ft_memcpy.c													\
+utils/memory/ft_calloc.c													\
+utils/memory/ft_memset.c													\
+utils/int_array/int_array.c													\
+utils/get_next_line/get_next_line_utils.c									\
+utils/get_next_line/get_next_line.c											\
+main.c																		\
+data/data.c																	\
+parsing/atoi_words.c														\
+parsing/parsing.c															\
+map/map.c																	\
+map/getter.c																\
+draw/event_state.c															\
+draw/draw.c																	\
+draw/transform.c															\
 
-.c.o:
-	@$(CC) $(CFLAGS)	\
-		$(addprefix -I , $(INCS))	\
-		-c $<	\
-		-o $(<:.c=.o)	
-	@echo $(CC) $(CFLAGS) $<
+INCS				=														\
+mlx_utils/color																\
+mlx_utils/vec2																\
+mlx_utils/event																\
+mlx_utils/event/window														\
+mlx_utils/event/keyboard													\
+mlx_utils/event/mouse														\
+mlx_utils/line																\
+mlx_utils																	\
+mlx_utils/image																\
+utils/str																	\
+utils/lst/include															\
+utils/is_charset															\
+utils																		\
+utils/file																	\
+utils/memory																\
+utils/int_array																\
+utils/get_next_line															\
+data																		\
+parsing																		\
+map																			\
+draw																		\
 
-$(NAME):	$(OBJS)
-			@$(MAKE) -si all -C mlx/mlx_linux
-			@$(CC) $(CFLAGS) $(OBJS) -L mlx/mlx_linux -lmlx_Linux -lmlx -lXext -lX11 -lm -o $(NAME)
+# **************************************************************************** #
+
+SRC_MANDATORY		=	$(addprefix mandatory/, $(SRCS))
+INC_MANDATORY		=	$(addprefix mandatory/, $(INCS))
+OBJ_MANDATORY		=	$(SRC_MANDATORY:.c=.o)
+
+SRC_BONUS			=	$(addprefix bonus/, $(SRCS))
+INC_BONUS			=	$(addprefix bonus/, $(INCS))
+OBJ_BONUS			=	$(SRC_BONUS:.c=.o)
 
 all:		$(NAME)
 
+$(OBJ_BONUS): %.o : %.c
+		@$(CC) $(CFLAGS)										\
+		$(addprefix -I , $(INC_BONUS)) -I $(MLX_DIR)				\
+		-c $< -o $@
+		@echo $(CC) $(CFLAGS) $@
+
+$(OBJ_MANDATORY): %.o : %.c
+		@$(CC) $(CFLAGS)										\
+		$(addprefix -I , $(INC_MANDATORY)) -I $(MLX_DIR)	\
+		-c $<\
+		-o $(<:.c=.o)
+		@echo $(CC) $(CFLAGS) $@
+
+$(NAME):	$(OBJ_MANDATORY)
+			@$(MAKE) -si all -C $(MLX_DIR)
+			@$(CC) $(CFLAGS) $(OBJ_MANDATORY) $(LINK) -o $(NAME)
+			@echo $(CC) $(CFLAGS) $(NAME)
+
+bonus:		CFLAGS += $(EXTRA_FLAG)
+bonus:		$(OBJ_BONUS)
+			@$(MAKE) -si all -C $(MLX_DIR)
+			@$(CC) $(CFLAGS) $(OBJ_BONUS) $(LINK) -o $(NAME)
+			@echo $(CC) $(CFLAGS) $(NAME)
+
 clean:
-			@$(MAKE) -si clean -C mlx/mlx_linux
-			@$(RM) $(OBJS)
+			@$(MAKE) -si clean -C $(MLX_DIR)
+			@$(RM) $(OBJ_BONUS)
+			@$(RM) $(OBJ_MANDATORY)
 
 fclean:		clean
 			@$(RM) $(NAME)
 
 re:			fclean all
 
-bonus:		fclean
-			@$(MAKE) -si all -C mlx/mlx_linux
-			@$(MAKE) all -C . EXTRA_FLAG="-Ofast -flto=full -DBONUS"
-
 valgrind:	fclean
 			@$(MAKE) all -C . EXTRA_FLAG="-g3"
-			valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) ./asset/42.fdf
+			@valgrind														\
+			-s																\
+			--leak-check=full												\
+			--show-leak-kinds=all											\
+			--track-origins=yes												\
+			./$(NAME) ./asset/42.fdf										\
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re bonus
