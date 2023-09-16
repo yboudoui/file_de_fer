@@ -6,13 +6,13 @@
 #    By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 14:53:15 by yboudoui          #+#    #+#              #
-#    Updated: 2022/11/27 14:41:21 by yboudoui         ###   ########.fr        #
+#    Updated: 2023/09/16 10:50:38 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME				=	fdf
 
-CC					=	cc
+CC					=	clang
 
 EXTRA_FLAG			=	-Ofast -flto=full -DBONUS
 
@@ -27,7 +27,7 @@ LINK				=	-L $(MLX_DIR) -lmlx_Linux -lmlx -lXext -lX11 -lm
 
 # **************************************************************************** #
 
-SRCS				=														\
+SRCS				= $(addprefix srcs/, 									\
 mlx_utils/color/color.c														\
 mlx_utils/vec2/vec2.c														\
 mlx_utils/event/window/window.c												\
@@ -69,8 +69,9 @@ map/getter.c																\
 draw/event_state.c															\
 draw/draw.c																	\
 draw/transform.c															\
+)
 
-INCS				=														\
+INCS				= $(addprefix srcs/,									\
 mlx_utils/color																\
 mlx_utils/vec2																\
 mlx_utils/event																\
@@ -92,49 +93,32 @@ data																		\
 parsing																		\
 map																			\
 draw																		\
+)\
+$(MLX_DIR)																	\
 
 # **************************************************************************** #
 
-SRC_MANDATORY		=	$(addprefix mandatory/, $(SRCS))
-INC_MANDATORY		=	$(addprefix mandatory/, $(INCS))
-OBJ_MANDATORY		=	$(SRC_MANDATORY:.c=.o)
-
-SRC_BONUS			=	$(addprefix bonus/, $(SRCS))
-INC_BONUS			=	$(addprefix bonus/, $(INCS))
-OBJ_BONUS			=	$(SRC_BONUS:.c=.o)
+OBJS				=	$(SRCS:.c=.o)
 
 all:		$(NAME)
 
-$(OBJ_BONUS): %.o : %.c
-		@$(CC) $(CFLAGS)										\
-		$(addprefix -I , $(INC_BONUS)) -I $(MLX_DIR)				\
-		-c $< -o $@
-		@echo $(CC) $(CFLAGS) $@
+$(OBJS):	%.o : %.c
+			@echo $(CC) $(CFLAGS) $@
+			@$(CC) $(CFLAGS) $(addprefix -I , $(INCS)) -c $< -o $(<:.c=.o)
 
-$(OBJ_MANDATORY): %.o : %.c
-		@$(CC) $(CFLAGS)										\
-		$(addprefix -I , $(INC_MANDATORY)) -I $(MLX_DIR)	\
-		-c $<\
-		-o $(<:.c=.o)
-		@echo $(CC) $(CFLAGS) $@
-
-$(NAME):	$(OBJ_MANDATORY)
+$(NAME):	$(OBJS)
 			@$(MAKE) -si all -C $(MLX_DIR)
-			@$(CC) $(CFLAGS) $(OBJ_MANDATORY) $(LINK) -o $(NAME)
 			@echo $(CC) $(CFLAGS) $(NAME)
+			@$(CC) $(CFLAGS) $(OBJS) $(LINK) -o $(NAME)
 
 bonus:		CFLAGS += $(EXTRA_FLAG)
-bonus:		$(OBJ_BONUS)
-			@$(MAKE) -si all -C $(MLX_DIR)
-			@$(CC) $(CFLAGS) $(OBJ_BONUS) $(LINK) -o $(NAME)
-			@echo $(CC) $(CFLAGS) $(NAME)
+bonus:		re
 
 clean:
-			@$(MAKE) -si clean -C $(MLX_DIR)
-			@$(RM) $(OBJ_BONUS)
-			@$(RM) $(OBJ_MANDATORY)
+			@$(RM) $(OBJS)
 
 fclean:		clean
+			@$(MAKE) -si clean -C $(MLX_DIR)
 			@$(RM) $(NAME)
 
 re:			fclean all

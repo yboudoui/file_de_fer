@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str.h                                              :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/06 16:18:51 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/14 16:54:34 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/11/14 18:33:34 by yboudoui          #+#    #+#             */
+/*   Updated: 2023/09/16 10:11:58 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STR_H
-# define STR_H
+#ifndef FDF_H
+# define FDF_H
 
-# include "memory.h"
+# include "mlx_utils.h"
+# include "parsing.h"
+# include "data.h"
+# include <math.h>
 
-size_t	ft_strlen(const char *s);
-char	*ft_strtrim(char const *s1, char const *set);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	**ft_split(char	const *str, char c);
-void	free_split(void *data);
+# define WIDTH 1920
+# define HEIGHT 1080
+
+# ifndef BONUS
+#  define BONUS 0
+# endif
+
+t_vec2	transforme_vec2(t_vec2 in);
+t_vec2	center_screen(t_vec2 in);
+t_vec2	center_map(t_map *map, int pad, t_vec2 in);
+void	draw_image(t_data *data);
+bool	update_state(t_data *data);
+
 #endif

@@ -6,18 +6,17 @@
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 17:37:16 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/11/24 15:28:35 by yboudoui         ###   ########.fr       */
+/*   Updated: 2023/09/16 10:29:00 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef IMAGE_H
 # define IMAGE_H
 
-# include "memory.h"
-
 # include "line.h"
-# include <stdbool.h>
 # include "mlx_utils.h"
+
+# include <string.h>
 
 typedef struct s_mlx	t_mlx;
 
